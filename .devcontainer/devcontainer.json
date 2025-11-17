@@ -1,0 +1,20 @@
+{
+  "name": "Next.js Codespace",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  // Runs only once when the Codespace is first created
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // Runs every time the Codespace starts
+  "postStartCommand": "bash .devcontainer/post-start.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}

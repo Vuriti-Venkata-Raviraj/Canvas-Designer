@@ -1,7 +1,16 @@
 import { useCallback } from "react";
 import { fabric } from "fabric";
+import { useAutoResize } from "./use-auto-resize";
+import { useState } from "react";
 
 export const useEditor = () => {
+    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+    const [container, setContainer] = useState<HTMLDivElement | null>(null);
+    useAutoResize({
+        canvas,
+        container
+    });
+
     const init = useCallback(({
         initialCanvas,
         initialContainer,
@@ -20,8 +29,8 @@ export const useEditor = () => {
         });
 
         const initialWorkspace = new fabric.Rect({
-            width: 900,
-            height: 1200,
+            width: 1600,
+            height: 900,
             name: "clip",
             fill: "white",
             hasControls: false,
@@ -39,13 +48,16 @@ export const useEditor = () => {
         initialCanvas.centerObject(initialWorkspace);
         initialCanvas.clipPath = initialWorkspace;
 
-        const rect = new fabric.Rect({
+        setCanvas(initialCanvas);
+        setContainer(initialContainer);
+
+        const test = new fabric.Rect({
             width: 100,
             height: 100,
             fill: "black",
         });
-        initialCanvas.add(rect);
-        initialCanvas.centerObject(rect);
+        initialCanvas.add(test);
+        initialCanvas.centerObject(test);
     }, []);
 
     return { init };

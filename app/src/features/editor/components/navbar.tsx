@@ -15,8 +15,18 @@ import { Download } from "lucide-react";
 import { CiFileOn } from "react-icons/ci";
 import { FaFilePdf } from "react-icons/fa6";
 import { BsCloudCheck } from "react-icons/bs";
+import { ActiveTool } from "../types";
+import { cn } from "@/lib/utils";
 
-export const Navbar = () => {
+interface NavbarProps {
+    activeTool: ActiveTool;
+    onChangeActiveTool: (tool: ActiveTool) => void;
+}
+
+export const Navbar = ({
+    activeTool,
+    onChangeActiveTool
+} : NavbarProps) => {
     return (
         <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
             Logo
@@ -42,8 +52,8 @@ export const Navbar = () => {
                     <Button
                         variant={"ghost"}
                         size={"icon"}
-                        onClick={() => { }}
-                        className=""
+                        onClick={() => {onChangeActiveTool("select")}}
+                        className={cn(activeTool === "select" && "bg-gray-200")}
                     >
                         <MousePointerClick className="size-4" />
                     </Button>
